@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class ProductController {
     ProductService productService;
-    @PostMapping("/product/add")
+    @PostMapping("/products")
     public ResponseEntity<ProductDTO> addProduct(@RequestHeader("Authorization") String authorization, @RequestBody CreateProductDTO createProductDTO) {
         return new ResponseEntity<>(productService.addProduct(createProductDTO), HttpStatus.OK);
     }
-    @PostMapping("/product/update")
+    @PostMapping("/products")
     public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) {
         return new ResponseEntity<>(productService.updateProduct(productDTO), HttpStatus.OK);
     }
