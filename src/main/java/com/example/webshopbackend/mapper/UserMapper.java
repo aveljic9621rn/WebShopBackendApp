@@ -1,13 +1,14 @@
 package com.example.webshopbackend.mapper;
 
 import com.example.webshopbackend.domain.User;
+import com.example.webshopbackend.dto.CreateUserDTO;
 import com.example.webshopbackend.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
 
-    public UserDTO userToUserDTO(User user){
+    public UserDTO userToUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId(user.getUserId());
         userDTO.setName(user.getName());
@@ -19,7 +20,7 @@ public class UserMapper {
         return userDTO;
     }
 
-    public User userDTOToUser(UserDTO userDTO){
+    public User userDTOToUser(UserDTO userDTO) {
         User user = new User();
         user.setUserId(userDTO.getUserId());
         user.setName(userDTO.getName());
@@ -28,6 +29,17 @@ public class UserMapper {
         user.setMail(userDTO.getMail());
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
+        return user;
+    }
+
+    public User createUserDtoToUser(CreateUserDTO createUserDto) {
+        User user = new User();
+        user.setUsername(createUserDto.getUsername());
+        user.setPassword(createUserDto.getPassword());
+        user.setMail(createUserDto.getMail());
+        user.setPhoneNumber(createUserDto.getPhoneNumber());
+        user.setName(createUserDto.getName());
+        user.setSurname(createUserDto.getSurname());
         return user;
     }
 }

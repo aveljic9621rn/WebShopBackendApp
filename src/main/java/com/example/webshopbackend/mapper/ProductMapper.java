@@ -1,6 +1,7 @@
 package com.example.webshopbackend.mapper;
 
 import com.example.webshopbackend.domain.Product;
+import com.example.webshopbackend.dto.CreateProductDTO;
 import com.example.webshopbackend.dto.ProductDTO;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,19 @@ public class ProductMapper {
         product.setPrice(productDTO.getPrice());
         product.setUrl(productDTO.getUrl());
         product.setSubcategory(productDTO.getSubcategory());
+        return product;
+    }
+    public Product CreateProductDTOToProduct(CreateProductDTO createProductDTO){
+        Product product = new Product();
+        product.setProductID(createProductDTO.getProductID());
+        product.setName(createProductDTO.getName());
+        product.setCategory(createProductDTO.getCategory());
+        product.setDescription(createProductDTO.getDescription());
+        product.setImages(createProductDTO.getImages());
+        product.setFeatures(createProductDTO.getFeatures());
+        product.setPrice(createProductDTO.getPrice());
+        product.setUrl(createProductDTO.getUrl());
+        product.setSubcategory(createProductDTO.getSubcategory());
         return product;
     }
 }
