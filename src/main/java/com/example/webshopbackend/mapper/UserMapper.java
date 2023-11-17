@@ -20,18 +20,6 @@ public class UserMapper {
         return userDTO;
     }
 
-    public User userDTOToUser(UserDTO userDTO) {
-        User user = new User();
-        user.setUserId(userDTO.getUserId());
-        user.setName(userDTO.getName());
-        user.setSurname(userDTO.getSurname());
-        user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setMail(userDTO.getMail());
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
-        return user;
-    }
-
     public User createUserDtoToUser(CreateUserDTO createUserDto) {
         User user = new User();
         user.setUsername(createUserDto.getUsername());

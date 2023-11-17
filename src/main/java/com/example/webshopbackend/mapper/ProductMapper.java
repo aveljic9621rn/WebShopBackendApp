@@ -21,20 +21,6 @@ public class ProductMapper {
         productDTO.setSubcategory(product.getSubcategory());
         return productDTO;
     }
-
-    public Product ProductDTOToProduct(ProductDTO productDTO){
-        Product product = new Product();
-        product.setProductID(productDTO.getProductID());
-        product.setName(productDTO.getName());
-        product.setCategory(productDTO.getCategory());
-        product.setDescription(productDTO.getDescription());
-        product.setImages(productDTO.getImages());
-        product.setFeatures(productDTO.getFeatures());
-        product.setPrice(productDTO.getPrice());
-        product.setUrl(productDTO.getUrl());
-        product.setSubcategory(productDTO.getSubcategory());
-        return product;
-    }
     public Product CreateProductDTOToProduct(CreateProductDTO createProductDTO){
         Product product = new Product();
         product.setProductID(createProductDTO.getProductID());

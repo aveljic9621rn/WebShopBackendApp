@@ -1,6 +1,7 @@
 package com.example.webshopbackend.service;
 
 import com.example.webshopbackend.domain.ShoppingCart;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
