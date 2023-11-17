@@ -7,9 +7,12 @@ import com.example.webshopbackend.dto.ProductDTO;
 import com.example.webshopbackend.mapper.ProductMapper;
 import com.example.webshopbackend.repository.ProductRepository;
 import com.example.webshopbackend.service.ProductService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,21 +34,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProducts() {
         final String filePath = "src/main/resources/products.json";
-        List<Product> allProducts = null;
+
+            ObjectMapper objectMapper = new ObjectMapper();
+        List<Product> products = null;
         try {
-            allProducts = JSONParser.parseJsonFile(filePath);
-            // Process the list of products as needed
-            for (Product product : allProducts) {
-                System.out.println("Product: " + product.getName() + ", Price: " + product.getPrice());
-            }
-
+            products = objectMapper.readValue(new File(filePath), new TypeReference<>() {});
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return allProducts;
-    }
 
+        // Save products to the database
+            productRepository.saveAll(products);
 
+            return products;
+        }
     @Override
     public ProductDTO addProduct(CreateProductDTO createProductDTO) {
         Product product = productMapper.CreateProductDTOToProduct(createProductDTO);
@@ -74,5 +76,10 @@ public class ProductServiceImpl implements ProductService {
            product.setUrl(productDTO.getUrl());
        productRepository.save(product);
        return productMapper.productToProductDto(product);
+    }
+
+    @Override
+    public Product getProductById(Long productId) {
+        return productRepository.findProductByProductID(String.valueOf(productId));
     }
 }
