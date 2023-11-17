@@ -19,5 +19,29 @@ public class ProductController {
     public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) {
         return new ResponseEntity<>(productService.updateProduct(productDTO), HttpStatus.OK);
     }
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        List<ProductDTO> products = productService.getAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 
+    @GetMapping("/products/{productId}")
+    public ResponseEntity<ProductDTO> getProductDetails(@PathVariable Long productId) {
+        ProductDTO product = productService.getProductDetails(productId);
+        if (product != null) {
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
+        boolean success = productService.deleteProduct(productId);
+        if (success) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
