@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class ProductController {
     ProductService productService;
-    @PostMapping("/products")
+    @PutMapping("/products")
     public ResponseEntity<ProductDTO> addProduct(@RequestHeader("Authorization") String authorization, @RequestBody CreateProductDTO createProductDTO) {
         return new ResponseEntity<>(productService.addProduct(createProductDTO), HttpStatus.OK);
     }
